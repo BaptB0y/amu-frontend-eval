@@ -5,7 +5,7 @@ import { Customers } from './types/customer';
   selector: 'app-customer-list',
   template: `
     <h1>Liste des clients</h1>
-    <button routerLink="/create"> Créer un client </button>
+    <button routerLink="/create-customer"> Créer un client </button>
     <ul>
             <li *ngFor="let item of customers">
                 <a routerLink="/{{ item.id }}/details">

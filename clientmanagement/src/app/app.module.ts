@@ -13,13 +13,16 @@ import { RouterModule, Routes } from '@angular/router';
 import {CustomerDetailsPageComponent} from "./pages/customer-details-page.component";
 import {CustomerCreatePageComponent} from "./pages/customer-create-page.component";
 import {InvoicesListComponent} from "./invoice-list-component";
+import {InvoiceFormComponent} from "./invoice-form.component";
+import {InvoiceCreatePageComponent} from "./pages/invoice-create-page.component";
 
 const routes: Routes = [
   // La page d'accueil affichera la liste des clients
   { path: '', component: CustomerListPageComponent },
   // Ici on utilise une URL paramétrée
   { path: ':id/details', component: CustomerDetailsPageComponent },
-  { path: 'create', component: CustomerCreatePageComponent }
+  { path: 'create-customer', component: CustomerCreatePageComponent },
+  { path: ':id/details/create-invoice', component: InvoiceCreatePageComponent }
 
 ]
 
@@ -31,7 +34,9 @@ const routes: Routes = [
     CustomerFormComponent,
     CustomerListComponent,
     InvoicesListComponent,
-    CustomerDetailsPageComponent
+    CustomerDetailsPageComponent,
+    InvoiceFormComponent,
+    InvoiceCreatePageComponent
   ],
     imports: [
       BrowserModule,

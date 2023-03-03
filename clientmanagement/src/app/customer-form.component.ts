@@ -12,25 +12,25 @@ import {FormControl, FormGroup } from "@angular/forms";
           name="customer-full-name"
           placeholder="Nom complet"
         />
-        <input formControlName="fullName"
+        <input formControlName="email"
                type="text"
                name="customer-email"
                placeholder="email" />
         <button>Enregistrer</button>
       </form>
-      <a routerLink="/">Retour aux clients</a>
+      <button routerLink="/">Retour aux clients</button>
   `
 })
 export class CustomerFormComponent {
   @Output()
-  onNewCustomer = new EventEmitter<string>();
-
+  onNewCustomer = new EventEmitter<any>();
   form = new FormGroup({
     fullName: new FormControl(),
     email: new FormControl()
   });
+
   onSubmit() {
-    this.onNewCustomer.emit(this.form.value.email);
+    this.onNewCustomer.emit( {fullName: this.form.value.fullName, email:this.form.value.email});
     this.form.setValue({
       fullName: '',
       email:''

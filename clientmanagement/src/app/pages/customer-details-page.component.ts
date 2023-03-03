@@ -20,7 +20,11 @@ import {InvoicesService} from "../api/invoices.service";
       >
       </app-invoices-list>
     </ng-container>
+    <button *ngIf="customer" routerLink="create-invoice">Créer une facture</button>
+
     <p *ngIf="!customer">Le client n'est pas créé</p>
+
+
   `
 })
 export class CustomerDetailsPageComponent {
@@ -28,7 +32,6 @@ export class CustomerDetailsPageComponent {
   invoices: Invoices = [];
 
   constructor(private route: ActivatedRoute,  private customersService: CustomersService, private invoicesService: InvoicesService) { }
-
   ngOnInit() {
     // On peut récupérer le paramètre "id" qui se trouve
     // dans l'URL, et le transformer en nombre :

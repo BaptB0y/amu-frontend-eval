@@ -6,16 +6,16 @@ import {Customers} from "../types/customer";
 @Component({
   selector: "app-customer-create-page",
   template: `
-        <app-customer-form (onNewCustomer)="addCustomer($event, $event)"></app-customer-form>
+        <app-customer-form (onNewCustomer)="addCustomer($event)"></app-customer-form>
     `
 })
 export class CustomerCreatePageComponent {
   customers: Customers = [];
   constructor(private route: ActivatedRoute,  private service: CustomersService) { }
 
-  addCustomer(fullName: string, email: string) {
+  addCustomer(obj: any) {
     this.service
-      .create(fullName, email)
+      .create(obj)
       .subscribe((customers) => this.customers.push(customers[0]));
   }
 }

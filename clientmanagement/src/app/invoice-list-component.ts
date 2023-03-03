@@ -7,14 +7,15 @@ import { Invoices } from './types/invoice';
     <ul>
         <li *ngFor="let item of invoices">
           <label>
-              {{ item.amount }} {{ item.status }}
+              {{ item.amount / 100 }} {{ item.status }}
           </label>
         </li>
-    </ul>
-    <button>Créer une facture</button>
-    `
+    </ul>   `
 })
 export class InvoicesListComponent {
+
   @Input()
   invoices: Invoices = [];
+
+
 }

@@ -52,10 +52,10 @@ export class CustomersService {
    * Créé une tâche auprès de l'API qui nous retournera un tableau contenant la tâche
    * nouvellement créée
    */
-  create(fullName: string, email:string): Observable<Customers> {
+  create(obj:any): Observable<Customers> {
     return this.http.post<Customers>(SUPABASE_URL, {
-      fullName: fullName,
-      email: email
+      fullName: obj.fullName,
+      email: obj.email
     }, {
       headers: {
         "Content-Type": "application/json",

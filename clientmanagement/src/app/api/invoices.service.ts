@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Invoices } from "../types/invoice";
+import {Customers} from "../types/customer";
 
 // Commençons par factoriser sur 2 constantes les URLs et
 // clé d'API de SUPABASE histoire de ne pas avoir à les
@@ -68,10 +69,11 @@ export class InvoicesService {
    * Créé une tâche auprès de l'API qui nous retournera un tableau contenant la tâche
    * nouvellement créée
    */
-  create(text: string): Observable<Invoices> {
+  create(obj:any): Observable<Invoices> {
     return this.http.post<Invoices>(SUPABASE_URL, {
-      text: text,
-      done: false
+      amount: obj.amount * 100,
+      status: obj.status,
+      customer:obj.customer
     }, {
       headers: {
         "Content-Type": "application/json",
