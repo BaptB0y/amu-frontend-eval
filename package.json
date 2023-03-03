@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd app && ng test",
+    "start": "cd app && ng serve --host 0.0.0.0 --disable-host-check --hmr",
     "cy:run": "cypress run",
     "cy:open": "cypress open"
   },
@@ -24,6 +25,10 @@
     "cypress": "^9.2.0"
   },
   "dependencies": {
+<<<<<<< HEAD
+    "@supabase/supabase-js": "^2.10.0"
+=======
     "@angular/cli": "^15.2.1"
+>>>>>>> d2a1d4d (First commit)
   }
 }
