@@ -25,10 +25,6 @@
     "cypress": "^9.2.0"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@supabase/supabase-js": "^2.10.0"
-=======
-    "@angular/cli": "^15.2.1"
->>>>>>> d2a1d4d (First commit)
   }
 }
