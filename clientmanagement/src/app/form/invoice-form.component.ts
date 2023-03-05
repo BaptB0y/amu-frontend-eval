@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: "app-invoice-form",
-  styleUrls: ['../button.css'],
+  styleUrls: ['../../button.css'],
   template: `
 
     <div class="container2">

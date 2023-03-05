@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: "app-customer-form",
-  styleUrls: ['../button.css'],
+  styleUrls: ['../../button.css'],
   template: `
     <div class="container2">
       <button class="custom-btn return" routerLink="/">Retour aux clients</button>

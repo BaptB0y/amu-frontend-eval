@@ -7,11 +7,11 @@ import {CustomersService} from "./api/customers.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { CustomerListPageComponent } from "./pages/customers-list-page.component";
-import {CustomerFormComponent} from "./customer-form.component";
+import {CustomerFormComponent} from "./form/customer-form.component";
 import { RouterModule, Routes } from '@angular/router';
 import {CustomerDetailsPageComponent} from "./pages/customer-details-page.component";
 import {CustomerCreatePageComponent} from "./pages/customer-create-page.component";
-import {InvoiceFormComponent} from "./invoice-form.component";
+import {InvoiceFormComponent} from "./form/invoice-form.component";
 import {InvoiceCreatePageComponent} from "./pages/invoice-create-page.component";
 
 const routes: Routes = [

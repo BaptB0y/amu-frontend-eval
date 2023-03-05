@@ -5,7 +5,7 @@ import { By } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { of } from "rxjs";
 import {CustomerListPageComponent} from "../app/pages/customers-list-page.component";
-import {CustomerFormComponent} from "../app/customer-form.component";
+import {CustomerFormComponent} from "../app/form/customer-form.component";
 import {CustomersService} from "../app/api/customers.service";
 import {CustomerCreatePageComponent} from "../app/pages/customer-create-page.component";
 describe("CustomerListPageComponent", () => {
