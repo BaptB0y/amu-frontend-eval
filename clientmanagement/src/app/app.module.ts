@@ -8,11 +8,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { CustomerListPageComponent } from "./pages/customers-list-page.component";
 import {CustomerFormComponent} from "./customer-form.component";
-import {CustomerListComponent} from "./customer-list-component";
 import { RouterModule, Routes } from '@angular/router';
 import {CustomerDetailsPageComponent} from "./pages/customer-details-page.component";
 import {CustomerCreatePageComponent} from "./pages/customer-create-page.component";
-import {InvoicesListComponent} from "./invoice-list-component";
 import {InvoiceFormComponent} from "./invoice-form.component";
 import {InvoiceCreatePageComponent} from "./pages/invoice-create-page.component";
 
@@ -20,9 +18,9 @@ const routes: Routes = [
   // La page d'accueil affichera la liste des clients
   { path: '', component: CustomerListPageComponent },
   // Ici on utilise une URL paramétrée
-  { path: ':id/details', component: CustomerDetailsPageComponent },
-  { path: 'create-customer', component: CustomerCreatePageComponent },
-  { path: ':id/details/create-invoice', component: InvoiceCreatePageComponent }
+  { path: 'create', component: CustomerCreatePageComponent },
+  { path: ':id/invoices/add', component: InvoiceCreatePageComponent },
+  { path: ':id', component: CustomerDetailsPageComponent }
 
 ]
 
@@ -32,8 +30,6 @@ const routes: Routes = [
     CustomerListPageComponent,
     CustomerCreatePageComponent,
     CustomerFormComponent,
-    CustomerListComponent,
-    InvoicesListComponent,
     CustomerDetailsPageComponent,
     InvoiceFormComponent,
     InvoiceCreatePageComponent
