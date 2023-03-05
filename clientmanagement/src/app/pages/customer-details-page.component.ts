@@ -7,12 +7,13 @@ import {InvoicesService} from "../api/invoices.service";
 
 @Component({
   selector: 'app-customer-details-page',
+  styleUrls: ['../../button.css'],
   template: `
 
     <div class="container2">
-      <button class="btn btn-secondary" routerLink="/">Retour aux clients</button>
-      <div class="card text-white bg-info">
-        <div class="card-header" style="margin-top: 25px;">
+      <button class="custom-btn return" routerLink="/">Retour aux clients</button>
+      <div class="card bg-light">
+        <div class="card-header">
           <ng-container *ngIf="customer">
             <h2>Fiche de {{ customer.fullName }}</h2>
             <h3>({{ customer.email }})</h3>
@@ -24,13 +25,13 @@ import {InvoicesService} from "../api/invoices.service";
             <table class="table table-striped" style="text-align: left;">
               <thead class="thead-dark">
               <tr>
-                <th scope="col">Montant</th>
+                <th scope="col">Montant (€)</th>
                 <th scope="col">Status</th>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let item of invoices">
-                <th scope="row">{{ item.amount / 100 }}</th>
+                <th scope="row">{{ item.amount / 100 }} €</th>
                 <td *ngIf="item.status === 'SENT'">Envoyée</td>
                 <td *ngIf="item.status === 'PAID'">Payée</td>
               </tr>
@@ -40,7 +41,7 @@ import {InvoicesService} from "../api/invoices.service";
         </div>
       </div>
       <div style="text-align: right">
-        <button *ngIf="customer" class="btn btn-info" routerLink="/{{customer.id}}/invoices/add">Créer une facture</button>
+        <button *ngIf="customer" class="custom-btn creation" routerLink="/{{customer.id}}/invoices/add">Créer une facture</button>
       </div>
     </div>
 

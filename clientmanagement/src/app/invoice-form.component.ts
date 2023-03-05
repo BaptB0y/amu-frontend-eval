@@ -8,7 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   template: `
 
     <div class="container2">
-      <button class="btn btn-secondary" routerLink="/">Retour aux clients</button>
+      <button class="custom-btn return" routerLink="/">Retour aux clients</button>
       <div class="card text-white bg-info">
         <div class="card-header"><h1>Ajouter une facture</h1></div>
         <div class="card-body bg-light">
@@ -24,7 +24,10 @@ import {ActivatedRoute, Router} from "@angular/router";
               <option value="SENT">Envoyée</option>
               <option value="PAID">Payée</option>
             </select>
-            <button class="btn btn-primary" [class.spinner]="loading" [disabled]="loading">Enregistrer la facture</button>
+            <button class="custom-btn creation" [class.spinner]="loading" [disabled]="loading">
+              <span *ngIf="loading"> </span>
+              <span *ngIf="!loading"> Enregistrer la facture </span>
+            </button>
           </form>
         </div>
       </div>

@@ -15,19 +15,13 @@ h1, h2, h3{
   text-align: center;
 }
 
-button {
-  margin-bottom: 20px;
-  margin-top: 20px;
-  margin-left: 100px;
-}
-
 .container{
+  margin-top:3%;
   text-align: right;
-  margin:10%;
 }
 
 .container2{
-  margin:10%;
+  margin:3%;
 }
 
 .card-body{
@@ -45,7 +39,62 @@ button {
 .form-control{
   margin-bottom: 25px;
 }
+.card-header{
+  padding-top: 20px;
+  background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  color: #fff;
+}
+
+.card-header.header2{
+  padding-top: 5px;
+  background-image: radial-gradient(100% 100% at 100% 0, #5468ff 0, #5468ff 100%);
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+}
+.card-header.header2 a{
+  color: white;
+}
 
 .card-heade.bg-info{
   margin-bottom: 15px;
+  background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  color: #fff;
+}
+
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+  7px 7px 20px 0px rgba(0,0,0,.1),
+  4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-left: 100px;
+}
+
+.ng-valid.ng-dirty:not(form) {
+  border: solid 2px lightgreen;
+}
+
+.ng-invalid.ng-dirty:not(form), .ng-invalid:not(form).form-submitted, .error .error-message{
+  border: solid 2px lightcoral;
+  content-visibility: visible;
+}
+
+.ng-invalid.ng-dirty:not(form) label, .ng-invalid:not(form).form-submitted label {
+  display: inline-block;
+  content: 'Test attention erreur !';
+  content-visibility: visible;
 }
