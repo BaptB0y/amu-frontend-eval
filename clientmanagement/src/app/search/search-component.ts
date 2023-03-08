@@ -9,16 +9,13 @@ import {Component, EventEmitter, OnInit, Output} from "@angular/core";
       </div>
       <input type="text" class="form-control" placeholder="Rechercher..." [(ngModel)]="enteredSearchValue" (input)="onSearchTextChanged()">
     </div>
-
   `
 })
 export class SearchComponent implements OnInit{
 
   constructor() {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
   enteredSearchValue: string ='';
 
   @Output()
