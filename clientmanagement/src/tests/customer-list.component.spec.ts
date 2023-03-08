@@ -1,12 +1,13 @@
 import { HttpClientModule } from "@angular/common/http";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { of } from "rxjs";
 import {CustomerListPageComponent} from "../app/pages/customers-list-page.component";
 import {CustomersService} from "../app/api/customers.service";
 import {CustomerFormComponent} from "../app/form/customer-form.component";
+import {SearchComponent} from "../app/search/search-component";
 
 describe("CustomerComponent", () => {
   let list_fixture: ComponentFixture<CustomerListPageComponent>;
@@ -17,12 +18,14 @@ describe("CustomerComponent", () => {
     await TestBed.configureTestingModule({
       declarations: [
         CustomerListPageComponent,
-        CustomerFormComponent
+        CustomerFormComponent,
+        SearchComponent
       ],
       providers: [CustomersService],
       imports: [
         HttpClientModule,
         ReactiveFormsModule,
+        FormsModule,
         RouterModule.forRoot([])
       ],
     }).compileComponents();
