@@ -6,18 +6,17 @@ import { RouterModule } from "@angular/router";
 import { of } from "rxjs";
 import {CustomerListPageComponent} from "../app/pages/customers-list-page.component";
 import {CustomersService} from "../app/api/customers.service";
-import {CustomerCreatePageComponent} from "../app/pages/customer-create-page.component";
 import {CustomerFormComponent} from "../app/form/customer-form.component";
-describe("CustomerListPageComponent", () => {
-  let fixture1: ComponentFixture<CustomerListPageComponent>;
-  let fixture2: ComponentFixture<CustomerCreatePageComponent>;
-  let fixture3: ComponentFixture<CustomerFormComponent>;
+
+describe("CustomerComponent", () => {
+  let list_fixture: ComponentFixture<CustomerListPageComponent>;
+  let form_fixture: ComponentFixture<CustomerFormComponent>;
+  let form_component: CustomerFormComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         CustomerListPageComponent,
-        CustomerCreatePageComponent,
         CustomerFormComponent
       ],
       providers: [CustomersService],
@@ -28,10 +27,9 @@ describe("CustomerListPageComponent", () => {
       ],
     }).compileComponents();
 
-    fixture1 = TestBed.createComponent(CustomerListPageComponent);
-    fixture2 = TestBed.createComponent(CustomerCreatePageComponent);
-    fixture3 = TestBed.createComponent(CustomerFormComponent);
-
+    list_fixture = TestBed.createComponent(CustomerListPageComponent);
+    form_fixture = TestBed.createComponent(CustomerFormComponent);
+    form_component = form_fixture.componentInstance;
   });
 
   it('should call CustomersService and display returned customers', () => {
@@ -43,25 +41,26 @@ describe("CustomerListPageComponent", () => {
       {id: 1, fullName: "MOCK_CUSTOMER_1", email: "MOCK_CUSTOMER_1_EMAIL"}
     ]));
 
-    fixture1.detectChanges();
+    list_fixture.detectChanges();
     expect(findAllSpy).toHaveBeenCalled();
-    expect(fixture1.debugElement.queryAll(By.css('.card-header')).length-1).toBe(1);
+    expect(list_fixture.debugElement.queryAll(By.css('.card-header')).length-1).toBe(1);
   });
 
 
-  it('should call CustomsService on a creation', () => {
-    const service = TestBed.inject(CustomersService);
-    const component = fixture3.componentInstance;
-    const createSpy = spyOn(service, "create");
-    createSpy.and.returnValue(of([]));
-    fixture2.detectChanges();
+  it('should call CustomersService, and create a customer', () => {
+    const form = form_component.form;
+    const submitButton = form_fixture.debugElement.query(By.css('#save'));
+    const submitSpy = spyOn(form_component.onNewCustomer, 'emit');
+    form.setValue({fullName:'Test Test', email:'test@test.com' });
+    form_fixture.detectChanges();
+    expect(form.valid).toBeTruthy();
 
-    const submitButton = fixture3.debugElement.query(By.css('#save')).nativeElement;
-    submitButton.click();
-    expect(createSpy).toHaveBeenCalledTimes(1);
-  });
-  it('should be created', () => {
-    const service = TestBed.inject(CustomersService);
-    expect(service).toBeTruthy();
+    submitButton.nativeElement.click();
+
+    expect(submitSpy).toHaveBeenCalled();
+
+    let emitted = submitSpy.calls.mostRecent().args[0];
+    expect(emitted.fullName).toBe('Test Test');
+    expect(emitted.email).toBe('test@test.com');
   });
 });

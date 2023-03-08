@@ -11,18 +11,21 @@ import { Customers } from "../types/customer";
       <div class="card bg-light">
         <div class="card-header"><h1>Liste des clients</h1></div>
         <div class="card-body">
+          <app-search (searchTextChanged)="onSearch($event)"></app-search>
           <div class="card" *ngFor="let item of customers">
-            <div class="card-header header2">
-              <a routerLink="{{ item.id }}/" data-toggle="tooltip" data-placement="top" title="Voir plus de détails...">
-                {{ item.fullName }}
-              </a>
-            </div>
-            <div class="card-body">
-              <blockquote class="blockquote">
-                <label>
-                  {{ item.email }}
-                </label>
-              </blockquote>
+            <div *ngIf="searchText === '' || item.email.toLowerCase().includes(searchText) || item.fullName.toLowerCase().includes(searchText) || item.email.includes(searchText) || item.fullName.includes(searchText) ">
+              <div class="card-header header2">
+                <a routerLink="{{ item.id }}/" data-toggle="tooltip" data-placement="top" title="Voir plus de détails...">
+                  {{ item.fullName }}
+                </a>
+              </div>
+              <div class="card-body">
+                <blockquote class="blockquote">
+                  <label>
+                    {{ item.email }}
+                  </label>
+                </blockquote>
+              </div>
             </div>
           </div>
         </div>
@@ -34,11 +37,17 @@ import { Customers } from "../types/customer";
 export class CustomerListPageComponent {
   customers: Customers = [];
 
+  searchText:string ='';
+
   constructor(private service: CustomersService) { }
 
   ngOnInit() {
     this.service
       .findAll()
       .subscribe((customers) => this.customers = customers)
+  }
+
+  onSearch(searchValue: string){
+    this.searchText = searchValue;
   }
 }

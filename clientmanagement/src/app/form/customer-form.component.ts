@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: "app-customer-form",
-  styleUrls: ['../../button.css'],
+  styleUrls: ['../../button.css',   '../../validators.css'],
   template: `
     <div class="container2">
       <button class="custom-btn return" routerLink="/">Retour aux clients</button>
@@ -39,35 +39,25 @@ import {ActivatedRoute, Router} from "@angular/router";
   `
 })
 export class CustomerFormComponent {
-  constructor(private router: Router, private formBuilder: FormBuilder) { }
-
-  // @ts-ignore
-  form: FormGroup;
-
+  constructor(private router: Router) { }
 
   @Output()
   onNewCustomer = new EventEmitter<any>();
 
-  formSubmitted = false;
+  form = new FormGroup({
+    fullName: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email])
+  });
 
+  formSubmitted = false;
   loading = false;
 
-  buildForm() {
-    this.form = this.formBuilder.group({
-      fullName: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email])
-    });
-  }
-
-  ngOnInit() {
-    this.buildForm();
-  }
-
   onSubmit(event:any) {
-    event.preventDefault()
-    this.formSubmitted = true;
+    console.log('Test');
+    event.preventDefault();
     if (this.form.valid) {
       this.onNewCustomer.emit( {fullName: this.form.value.fullName, email:this.form.value.email});
+      this.formSubmitted = true;
       this.form.setValue({
         fullName: 'En cours d\'envoi...',
         email:'En cours d\'envoi...'

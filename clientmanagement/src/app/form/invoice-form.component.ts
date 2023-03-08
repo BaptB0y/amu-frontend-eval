@@ -13,13 +13,19 @@ import {ActivatedRoute, Router} from "@angular/router";
         <div class="card-header"><h1>Ajouter une facture</h1></div>
         <div class="card-body bg-light">
           <form class="form-group"  style="text-align: right; margin-top: 35px;" (ngSubmit)="onSubmit()" [formGroup]="form">
-            <input
-              class="form-control"
-              formControlName="amount"
-              type="number"
-              name="amount"
-              placeholder="Montant de la facture"
-            />
+            <div class="input-group mb-3">
+              <input
+                class="form-control"
+                formControlName="amount"
+                type="number"
+                name="amount"
+                placeholder="Montant de la facture"
+              />              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">€</span>
+              </div>
+            </div>
+
+
             <select type="select" class="form-control" [(ngModel)]='ngSelect' formControlName="status" name="status" ngModel>
               <option value="SENT">Envoyée</option>
               <option value="PAID">Payée</option>
@@ -49,10 +55,9 @@ export class InvoiceFormComponent {
   loading = false;
 
   onSubmit() {
-    console.log(this.form.value)
     this.onNewInvoice.emit({amount: this.form.value.amount, status:this.form.value.status, customer:this.id});
     this.form.setValue({
-      amount: '',
+      amount: 'Soumission en cours...',
       status: ''
     });
     this.loading = true;

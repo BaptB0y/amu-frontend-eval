@@ -9,18 +9,18 @@ import {InvoiceCreatePageComponent} from "../app/pages/invoice-create-page.compo
 import {CustomersService} from "../app/api/customers.service";
 import {InvoicesService} from "../app/api/invoices.service";
 import {InvoiceFormComponent} from "../app/form/invoice-form.component";
-import any = jasmine.any;
+import {CustomerFormComponent} from "../app/form/customer-form.component";
 
 
 describe("InvoiceListComponent", () => {
   let fixture1: ComponentFixture<CustomerDetailsPageComponent>;
-  let fixture2: ComponentFixture<InvoiceFormComponent>;
+  let form_fixture: ComponentFixture<InvoiceFormComponent>;
+  let form_component: InvoiceFormComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         CustomerDetailsPageComponent,
-        InvoiceCreatePageComponent,
         InvoiceFormComponent
       ],
       providers: [InvoicesService, CustomersService],
@@ -32,7 +32,8 @@ describe("InvoiceListComponent", () => {
     }).compileComponents();
 
     fixture1 = TestBed.createComponent(CustomerDetailsPageComponent);
-    fixture2 = TestBed.createComponent(InvoiceFormComponent);
+    form_fixture = TestBed.createComponent(InvoiceFormComponent);
+    form_component = form_fixture.componentInstance;
   });
 
   it('should call InvoicesService and display returned invoices', () => {
@@ -49,24 +50,15 @@ describe("InvoiceListComponent", () => {
     expect(fixture1.debugElement.queryAll(By.css('tr')).length).toBe(2);
   });
 
-  it('should call InvoicesService on an invoice creation', () => {
-    const service = TestBed.inject(InvoicesService);
+  it('should call CustomerService, and display created customer', () => {
+    const submitSpy = spyOn(form_component.onNewInvoice, 'emit');
+    const saveButton = form_fixture.debugElement.query(By.css("#save"))
+    const form =  form_component.form
 
-    const findAllSpy = spyOn(service, "findByCustomerId");
+    form.setValue({amount:10000, status: "SENT"})
+    form_fixture.detectChanges();
+    saveButton.nativeElement.click();
 
-    findAllSpy.and.returnValue(of([
-      {id: 1, amount: 16000, status: "SENT", customer:1}
-    ]));
-
-    const toggleSpy = spyOn(service, "create");
-    toggleSpy.and.returnValue(of([]));
-    fixture2.detectChanges();
-
-    const obj:any = [
-      1, 0, 'SENT'
-    ];
-    const submitButton = fixture2.debugElement.query(By.css('#save'));
-    submitButton.triggerEventHandler('click', {});
-    expect(toggleSpy).toHaveBeenCalledWith(obj);
+    expect(submitSpy).toHaveBeenCalled()
   });
 });

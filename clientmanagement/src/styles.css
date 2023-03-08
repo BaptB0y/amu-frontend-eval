@@ -83,18 +83,3 @@ h1, h2, h3{
   margin-top: 20px;
   margin-left: 100px;
 }
-
-.ng-valid.ng-dirty:not(form) {
-  border: solid 2px lightgreen;
-}
-
-.ng-invalid.ng-dirty:not(form), .ng-invalid:not(form).form-submitted, .error .error-message{
-  border: solid 2px lightcoral;
-  content-visibility: visible;
-}
-
-.ng-invalid.ng-dirty:not(form) label, .ng-invalid:not(form).form-submitted label {
-  display: inline-block;
-  content: 'Test attention erreur !';
-  content-visibility: visible;
-}

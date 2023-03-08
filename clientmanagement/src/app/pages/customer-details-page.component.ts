@@ -22,8 +22,8 @@ import {InvoicesService} from "../api/invoices.service";
         </div>
         <div class="card-body bg-light">
           <ng-container *ngIf="invoices">
-            <table class="table table-striped" style="text-align: left;">
-              <thead class="thead-dark">
+            <table class="table table-bordered" style="text-align: left;">
+              <thead class="bg-primary">
               <tr>
                 <th scope="col">Montant (€)</th>
                 <th scope="col">Status</th>

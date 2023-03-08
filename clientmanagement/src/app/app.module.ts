@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {InvoicesService} from "./api/invoices.service";
 import {CustomersService} from "./api/customers.service";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { CustomerListPageComponent } from "./pages/customers-list-page.component";
 import {CustomerFormComponent} from "./form/customer-form.component";
@@ -13,6 +13,7 @@ import {CustomerDetailsPageComponent} from "./pages/customer-details-page.compon
 import {CustomerCreatePageComponent} from "./pages/customer-create-page.component";
 import {InvoiceFormComponent} from "./form/invoice-form.component";
 import {InvoiceCreatePageComponent} from "./pages/invoice-create-page.component";
+import {SearchComponent} from "./search/search-component";
 
 const routes: Routes = [
   // La page d'accueil affichera la liste des clients
@@ -32,14 +33,16 @@ const routes: Routes = [
     CustomerFormComponent,
     CustomerDetailsPageComponent,
     InvoiceFormComponent,
-    InvoiceCreatePageComponent
+    InvoiceCreatePageComponent,
+    SearchComponent
   ],
-    imports: [
-      BrowserModule,
-      ReactiveFormsModule,
-      HttpClientModule,
-      RouterModule.forRoot(routes)
-    ],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(routes),
+    FormsModule
+  ],
   providers: [
     CustomersService,
     InvoicesService
