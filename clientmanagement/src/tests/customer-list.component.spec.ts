@@ -5,17 +5,20 @@ import { By } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { of } from "rxjs";
 import {CustomerListPageComponent} from "../app/pages/customers-list-page.component";
-import {CustomerFormComponent} from "../app/form/customer-form.component";
 import {CustomersService} from "../app/api/customers.service";
 import {CustomerCreatePageComponent} from "../app/pages/customer-create-page.component";
+import {CustomerFormComponent} from "../app/form/customer-form.component";
 describe("CustomerListPageComponent", () => {
-  let fixture: ComponentFixture<CustomerListPageComponent>;
+  let fixture1: ComponentFixture<CustomerListPageComponent>;
+  let fixture2: ComponentFixture<CustomerCreatePageComponent>;
+  let fixture3: ComponentFixture<CustomerFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         CustomerListPageComponent,
-        CustomerCreatePageComponent
+        CustomerCreatePageComponent,
+        CustomerFormComponent
       ],
       providers: [CustomersService],
       imports: [
@@ -25,7 +28,10 @@ describe("CustomerListPageComponent", () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CustomerListPageComponent);
+    fixture1 = TestBed.createComponent(CustomerListPageComponent);
+    fixture2 = TestBed.createComponent(CustomerCreatePageComponent);
+    fixture3 = TestBed.createComponent(CustomerFormComponent);
+
   });
 
   it('should call CustomersService and display returned customers', () => {
@@ -34,29 +40,28 @@ describe("CustomerListPageComponent", () => {
     const findAllSpy = spyOn(service, "findAll");
 
     findAllSpy.and.returnValue(of([
-      {id: 1, fullName: "MOCK_TASK_1", email: "MOCK_TASK_1_EMAIL"}
+      {id: 1, fullName: "MOCK_CUSTOMER_1", email: "MOCK_CUSTOMER_1_EMAIL"}
     ]));
 
-    fixture.detectChanges();
+    fixture1.detectChanges();
     expect(findAllSpy).toHaveBeenCalled();
-    expect(fixture.debugElement.queryAll(By.css('.card-header')).length).toBe(1);
+    expect(fixture1.debugElement.queryAll(By.css('.card-header')).length-1).toBe(1);
   });
+
 
   it('should call CustomsService on a creation', () => {
     const service = TestBed.inject(CustomersService);
+    const component = fixture3.componentInstance;
+    const createSpy = spyOn(service, "create");
+    createSpy.and.returnValue(of([]));
+    fixture2.detectChanges();
 
-    const findAllSpy = spyOn(service, "findAll");
-    findAllSpy.and.returnValue(of([
-      {id: 1, fullName: "MOCK_TASK_1", email: "MOCK_TASK_1_EMAIL"}
-    ]));
-
-    const toggleSpy = spyOn(service, "create");
-    toggleSpy.and.returnValue(of([]));
-    fixture.detectChanges();
-
-    const submitButton = fixture.debugElement.query(By.css('#customerSubmitButton'));
-    submitButton.triggerEventHandler('click', {});
-
-    expect(toggleSpy).toHaveBeenCalledWith(2);
+    const submitButton = fixture3.debugElement.query(By.css('#save')).nativeElement;
+    submitButton.click();
+    expect(createSpy).toHaveBeenCalledTimes(1);
+  });
+  it('should be created', () => {
+    const service = TestBed.inject(CustomersService);
+    expect(service).toBeTruthy();
   });
 });

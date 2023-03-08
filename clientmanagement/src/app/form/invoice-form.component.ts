@@ -24,7 +24,7 @@ import {ActivatedRoute, Router} from "@angular/router";
               <option value="SENT">Envoyée</option>
               <option value="PAID">Payée</option>
             </select>
-            <button class="custom-btn creation" [class.spinner]="loading" [disabled]="loading">
+            <button class="custom-btn creation" id="save" [class.spinner]="loading" [disabled]="loading">
               <span *ngIf="loading"> </span>
               <span *ngIf="!loading"> Enregistrer la facture </span>
             </button>

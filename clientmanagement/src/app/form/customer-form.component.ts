@@ -28,7 +28,7 @@ import {ActivatedRoute, Router} from "@angular/router";
                    placeholder="email"
                    [ngClass]="{'form-submitted': formSubmitted}"
             />
-            <button class="custom-btn creation" [class.spinner]="loading" [disabled]="loading">
+            <button class="custom-btn creation" id="save" [class.spinner]="loading" [disabled]="loading">
               <span *ngIf="loading"> </span>
               <span *ngIf="!loading"> Enregistrer </span>
             </button>

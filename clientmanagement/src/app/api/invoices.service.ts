@@ -26,35 +26,6 @@ export class InvoicesService {
    */
   constructor(private http: HttpClient) { }
 
-  /**
-   * Récupère l'ensemble des lignes de l'API et retourne un tableau de tâches
-   */
-  findAll(): Observable<Invoices> {
-    return this.http.get<Invoices>(SUPABASE_URL, {
-      headers: {
-        "Content-Type": "application/json",
-        apiKey: SUPABASE_API_KEY
-      }
-    });
-  }
-
-
-  /**
-   * Met à jour le statut d'une tâche et retourne la tâche mise à jour (dans un tableau contenant une tâche)
-   */
-  toggleDone(id: number, isDone: boolean): Observable<Invoices> {
-    return this.http.patch<Invoices>(SUPABASE_URL + '?id=eq.' + id, {
-      done: isDone
-    }, {
-      headers: {
-        "Content-Type": "application/json",
-        apiKey: SUPABASE_API_KEY,
-        Prefer: "return=representation"
-      }
-    });
-  }
-
-
   findByCustomerId(id: number): Observable<Invoices> {
     return this.http.get<Invoices>(SUPABASE_URL + '?customer=eq.' + id, {
       headers: {

@@ -30,7 +30,7 @@ import {InvoicesService} from "../api/invoices.service";
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let item of invoices">
+              <tr id="item" *ngFor="let item of invoices">
                 <th scope="row">{{ item.amount / 100 }} €</th>
                 <td *ngIf="item.status === 'SENT'">Envoyée</td>
                 <td *ngIf="item.status === 'PAID'">Payée</td>

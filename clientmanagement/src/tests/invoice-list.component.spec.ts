@@ -6,17 +6,24 @@ import { RouterModule } from "@angular/router";
 import { of } from "rxjs";
 import {CustomerDetailsPageComponent} from "../app/pages/customer-details-page.component";
 import {InvoiceCreatePageComponent} from "../app/pages/invoice-create-page.component";
+import {CustomersService} from "../app/api/customers.service";
 import {InvoicesService} from "../app/api/invoices.service";
-describe("InvoiceListPageComponent", () => {
-  let fixture: ComponentFixture<CustomerDetailsPageComponent>;
+import {InvoiceFormComponent} from "../app/form/invoice-form.component";
+import any = jasmine.any;
+
+
+describe("InvoiceListComponent", () => {
+  let fixture1: ComponentFixture<CustomerDetailsPageComponent>;
+  let fixture2: ComponentFixture<InvoiceFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
         CustomerDetailsPageComponent,
-        InvoiceCreatePageComponent
+        InvoiceCreatePageComponent,
+        InvoiceFormComponent
       ],
-      providers: [InvoicesService],
+      providers: [InvoicesService, CustomersService],
       imports: [
         HttpClientModule,
         ReactiveFormsModule,
@@ -24,38 +31,42 @@ describe("InvoiceListPageComponent", () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CustomerDetailsPageComponent);
+    fixture1 = TestBed.createComponent(CustomerDetailsPageComponent);
+    fixture2 = TestBed.createComponent(InvoiceFormComponent);
   });
 
   it('should call InvoicesService and display returned invoices', () => {
     const service = TestBed.inject(InvoicesService);
 
-    const findAllSpy = spyOn(service, "findAll");
+    const findAllSpy = spyOn(service, "findByCustomerId");
 
     findAllSpy.and.returnValue(of([
       {id: 1, amount: 16000, status: "SENT", customer:1}
     ]));
 
-    fixture.detectChanges();
+    fixture1.detectChanges();
     expect(findAllSpy).toHaveBeenCalled();
-    expect(fixture.debugElement.queryAll(By.css('tr')).length).toBe(2);
+    expect(fixture1.debugElement.queryAll(By.css('tr')).length).toBe(2);
   });
-/*
-  it('should call CustomsService on a creation', () => {
-    const service = TestBed.inject(CustomersService);
 
-    const findAllSpy = spyOn(service, "findAll");
+  it('should call InvoicesService on an invoice creation', () => {
+    const service = TestBed.inject(InvoicesService);
+
+    const findAllSpy = spyOn(service, "findByCustomerId");
+
     findAllSpy.and.returnValue(of([
-      {id: 1, fullName: "MOCK_TASK_1", email: "MOCK_TASK_1_EMAIL"}
+      {id: 1, amount: 16000, status: "SENT", customer:1}
     ]));
 
     const toggleSpy = spyOn(service, "create");
     toggleSpy.and.returnValue(of([]));
-    fixture.detectChanges();
+    fixture2.detectChanges();
 
-    const submitButton = fixture.debugElement.query(By.css('#customerSubmitButton'));
+    const obj:any = [
+      1, 0, 'SENT'
+    ];
+    const submitButton = fixture2.debugElement.query(By.css('#save'));
     submitButton.triggerEventHandler('click', {});
-
-    expect(toggleSpy).toHaveBeenCalledWith(2);
-  });*/
+    expect(toggleSpy).toHaveBeenCalledWith(obj);
+  });
 });
