@@ -2,7 +2,7 @@
 
 `cd amu-frontend-eval/clientmanagement`
 
-Lancer `npm-install` pour installer les libraries nécessaires au bon fonctionnement de l'application.
+Lancer `npm install -g @angular/cli` pour installer les libraries nécessaires au bon fonctionnement de l'application.
 
 
 Lancer `ng run serve` tpour lancer le serveur : `http://localhost:4200/`

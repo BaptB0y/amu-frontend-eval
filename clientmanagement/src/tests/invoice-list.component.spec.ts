@@ -40,14 +40,13 @@ describe("InvoiceListComponent", () => {
     const service = TestBed.inject(InvoicesService);
 
     const findAllSpy = spyOn(service, "findByCustomerId");
-
     findAllSpy.and.returnValue(of([
       {id: 1, amount: 16000, status: "SENT", customer:1}
     ]));
 
     fixture1.detectChanges();
     expect(findAllSpy).toHaveBeenCalled();
-    expect(fixture1.debugElement.queryAll(By.css('tr')).length).toBe(2);
+    expect(fixture1.debugElement.queryAll(By.css('#item')).length).toBe(1);
   });
 
   it('should call CustomerService, and display created customer', () => {
