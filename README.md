@@ -4,7 +4,7 @@
 
 Lancer `npm install -g @angular/cli` pour installer les libraries nécessaires au bon fonctionnement de l'application.
 
-## L'application a besoin de bootstrap pour fonctionner, il faut donc l'installer.
+L'application a besoin de bootstrap pour fonctionner, il faut donc l'installer.
 
 Lancer `ng run serve` pour lancer le serveur : `http://localhost:4200/`
 
