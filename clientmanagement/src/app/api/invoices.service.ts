@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Invoices } from "../types/invoice";
-import {Customers} from "../types/customer";
 
 
 export const SUPABASE_URL = 'https://wnprumrkcufpgpnwhwor.supabase.co/rest/v1/invoices';

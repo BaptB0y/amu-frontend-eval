@@ -1,15 +1,13 @@
 import { HttpClientModule } from "@angular/common/http";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { of } from "rxjs";
 import {CustomerDetailsPageComponent} from "../app/pages/customer-details-page.component";
-import {InvoiceCreatePageComponent} from "../app/pages/invoice-create-page.component";
 import {CustomersService} from "../app/api/customers.service";
 import {InvoicesService} from "../app/api/invoices.service";
 import {InvoiceFormComponent} from "../app/form/invoice-form.component";
-import {CustomerFormComponent} from "../app/form/customer-form.component";
 
 
 describe("InvoiceListComponent", () => {
@@ -49,7 +47,7 @@ describe("InvoiceListComponent", () => {
     expect(fixture1.debugElement.queryAll(By.css('#item')).length).toBe(1);
   });
 
-  it('should call CustomerService, and display created customer', () => {
+  it('should call InvoicesService, and display created customer', () => {
     const submitSpy = spyOn(form_component.onNewInvoice, 'emit');
     const saveButton = form_fixture.debugElement.query(By.css("#save"))
     const form =  form_component.form

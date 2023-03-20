@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 import {FormControl, FormGroup, Validators, FormBuilder} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
   selector: "app-customer-form",
